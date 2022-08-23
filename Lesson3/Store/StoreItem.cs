@@ -1,15 +1,15 @@
 ﻿namespace Lesson3.Store
 {
-    internal class StoreItem
+    internal record StoreItem
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string ISBN { get; set; }
-        public decimal Price { get; set; }
+        public string ID { get; }
+        public string Name { get; }
+        public string Isbn { get; }
+        public decimal Price { get; }
 
         public StoreItem(string name, string id, string isbn, decimal price)
         {
-            ISBN = isbn;
+            Isbn = isbn;
             Name = name;
             ID = id;
             Price = price;
@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"ID:\t{ID}\nName:\t{Name}\nISBN:\t{ISBN}\nPrice:\t{Price}$\n";
+            return $"ID:\t{ID}\nName:\t{Name}\nISBN:\t{Isbn}\nPrice:\t{Price}$\n";
         }
     }
 }

@@ -15,8 +15,8 @@
         {
             if (_cache.TryGetValue(key, out var cachedValue))
             {
-                DateTime result = cachedValue.CreationTime.AddSeconds(cachedValue.Timeout);
-                if(result >= DateTime.Now)
+                DateTime expirationTime = cachedValue.CreationTime.AddSeconds(cachedValue.Timeout);
+                if(expirationTime >= DateTime.Now)
                 {
                     return cachedValue.Value;
                 }

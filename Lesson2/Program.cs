@@ -4,43 +4,44 @@ namespace Lesson2
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello!");
+
             Console.WriteLine("Please enter your name:");
-            string name = Console.ReadLine();
-            while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
-            {
-                Console.WriteLine("Please enter correct name!");
-                name = Console.ReadLine();
-            }
+            var name = TextInputChecker();
             Console.WriteLine("Please enter your surname:");
-            string surname = Console.ReadLine();
-            while (!Regex.IsMatch(surname, @"^[a-zA-Z]+$"))
-            {
-                Console.WriteLine("Please enter correct surname!");
-                surname = Console.ReadLine();
-            }
+            var surname = TextInputChecker();
             Console.WriteLine("Please enter your age:");
-            string ageinput = Console.ReadLine();
-            int age = 0;
-            while (!int.TryParse(ageinput, out age))
-            {
-                Console.WriteLine("Please, enter the valid age. It should be a number.");
-                ageinput = Console.ReadLine();
-            }
+            var age = AgeChecker();
             Console.WriteLine("Please enter your hobby:");
-            string hobby = Console.ReadLine();
-            while (!Regex.IsMatch(hobby, @"^[a-zA-Z]+$"))
-            {
-                Console.WriteLine("Please enter correct hobby!");
-                surname = Console.ReadLine();
-            }
+            var hobby = TextInputChecker();
 
             Console.WriteLine($"Name: {name}\nSurname: {surname}\nAge: {age}\nHobby: {hobby}");
 
+            string TextInputChecker()
+            {
+                string text = Console.ReadLine();
+                while (!Regex.IsMatch(text, @"^[a-zA-Z]+$"))
+                {
+                    Console.WriteLine($"Please enter correct text! It should contain only latin letters.");
+                    text = Console.ReadLine();
+                }
+                return text;
+            }
 
-
+            int AgeChecker()
+            {
+                var ageInput = Console.ReadLine();
+                int age;
+                bool IsAgeParsed = int.TryParse(ageInput, out age) && (age > 9 && age < 101);
+                while (!IsAgeParsed)
+                {
+                    Console.WriteLine("Please enter correct number from 10 to 99");
+                    IsAgeParsed = int.TryParse(Console.ReadLine(), out age) && (age > 9 && age < 100);
+                }
+                return age;
+            }
         }
     }
 }
