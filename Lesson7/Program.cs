@@ -25,7 +25,7 @@
                 }
                 else
                 {
-                    for (var i = a; i >= b; i--)
+                    for (var i = b; i <= a; i++)
                     {
                         Console.WriteLine($"Square root for {i} is {Math.Sqrt(i)}.");
                     }
