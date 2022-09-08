@@ -10,10 +10,10 @@ namespace Lesson8.Builder
             bool isIndexParsed;
             do
             {
-                isIndexParsed = int.TryParse(Console.ReadLine(), out number) && number.ToString().Length is > 5 and < 7;
+                isIndexParsed = int.TryParse(Console.ReadLine(), out number) && number.ToString().Length is >= 5 and < 7;
                 if (!isIndexParsed)
                 {
-                    Console.WriteLine("Please enter correct number above zero");
+                    Console.WriteLine("Please enter correct index number consists of 5-6 digits");
                 }
             }
             while (!isIndexParsed);
