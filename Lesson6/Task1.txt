@@ -1,0 +1,29 @@
+USE [CoffeeStore]
+GO
+/****** Object:  StoredProcedure [dbo].[MostPopularProductsChosenPeriod2]    Script Date: 03.09.2022 18:52:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+ALTER PROCEDURE [dbo].[MostPopularProductsChosenPeriod2]
+	@productTypeId UNIQUEIDENTIFIER,
+	@dateFrom DATETIME,
+	@dateTo DATETIME
+AS
+BEGIN
+
+	SELECT  
+	Products.Id AS ProductId ,Products.Name AS ProductName ,SUM(OrderDetails.Amount)
+	FROM CoffeeStore.dbo.Products AS Products
+	INNER JOIN CoffeeStore.dbo.OrderDetails AS OrderDetails 
+		INNER JOIN CoffeeStore.dbo.Orders AS Orders
+		ON OrderDetails.OrderId = Orders.Id
+	ON Products.Id = OrderDetails.ProductId
+	WHERE Products.ProductTypeId = @productTypeId
+		AND Orders.OrderStatus = 2
+		AND Orders.ModifiedDate BETWEEN @dateFrom AND @dateTo
+	GROUP BY Products.Id, Products.Name
+
+END

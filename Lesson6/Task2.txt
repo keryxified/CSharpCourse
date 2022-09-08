@@ -1,0 +1,22 @@
+USE [CoffeeStore]
+GO
+/****** Object:  StoredProcedure [dbo].[Most_active_clients]    Script Date: 03.09.2022 18:37:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[Most_active_clients]
+
+AS
+BEGIN
+
+	SELECT TOP 10 Clients.Name AS NAME, Clients.Surname as SURNAME, Count(Orders.Id) AS OrdersCount
+	FROM  CoffeeStore.dbo.Clients AS Clients
+	INNER JOIN Orders 
+	ON ClientId = Clients.Id
+	WHERE Orders.OrderStatus = 2
+	GROUP BY Clients.Name, Clients.Surname
+	ORDER BY OrdersCount DESC
+
+END

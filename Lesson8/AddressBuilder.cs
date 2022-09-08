@@ -4,96 +4,60 @@ namespace Lesson8
 {
     public class AddressBuilder : IGetAddress
     {
-        private UserAddress _userAddress;
+        private UserAddress _userAddress = new();
 
-        public void GetApartments()
+        public AddressBuilder WithApartments(short inputApartments)
         {
             Console.Write("\nPlease enter your house number:");
-            _userAddress.Apartments = HouseApartmentsChecker();
+            _userAddress.Apartments = inputApartments;
+            return this;
         }
 
-        public void GetCity()
+        public AddressBuilder WithCity(string inputCity)
         {
             Console.Write("\nPlease enter your city:");
-            _userAddress.City = TextInputChecker();
+            _userAddress.City = inputCity;
+            return this;
         }
 
-        public void GetCountry()
+        public AddressBuilder WithCountry(string inputCountry)
         {
             Console.Write("\nPlease enter your country:");
-            _userAddress.Country = TextInputChecker();
+            _userAddress.Country = inputCountry;
+            return this;
         }
 
-        public void GetHouse()
+        public AddressBuilder WithHouse(short inputHouse)
         {
             Console.Write("\nPlease enter your house number:");
-            _userAddress.House = HouseApartmentsChecker();
+            _userAddress.House = inputHouse;
+            return this;
         }
 
-        public void GetIndex()
+        public AddressBuilder WithIndex(int inputIndex)
         {
             Console.Write("\nPlease enter your index:");
-            _userAddress.Index = IndexChecker();
+            _userAddress.Index = inputIndex;
+            return this;
         }
 
-        public void GetRegion()
+        public AddressBuilder WithRegion(string inputRegion)
         {
             Console.Write("\nPlease enter your region:");
-            _userAddress.Region = TextInputChecker();
+            _userAddress.Region = inputRegion;
+            return this;
         }
 
-        public void GetStreet()
+        public AddressBuilder WithStreet(string inputStreet)
         {
             Console.Write("\nPlease enter your street:");
-            _userAddress.Street = TextInputChecker();
+            _userAddress.Street = inputStreet;
+            return this;
         }
 
-        public UserAddress GetAddress()
+        public UserAddress Build()
         {
-            GetCountry();
-            GetIndex();
-            GetRegion();
-            GetCity();
-            GetStreet();
-            GetHouse();
-            GetApartments();
             return _userAddress;
-        }
-
-        private string TextInputChecker()
-        {
-            string text = Console.ReadLine();
-            while (!Regex.IsMatch(text, @"^[a-zA-Z]+$"))
-            {
-                Console.WriteLine($"Please enter correct text! It should contain only latin letters.");
-                text = Console.ReadLine();
-            }
-            return text;
-        }
-        private int IndexChecker()
-        {
-            var numberInput = Console.ReadLine();
-            int number;
-            bool IsIndexParsed = int.TryParse(numberInput, out number) && (number.ToString().Length > 5 && number.ToString().Length < 7);
-            while (!IsIndexParsed)
-            {
-                Console.WriteLine("Please enter correct number above zero");
-                IsIndexParsed = int.TryParse(Console.ReadLine(), out number) && (number.ToString().Length > 5 && number.ToString().Length < 7);
-            }
-            return number;
-        }
-
-        private short HouseApartmentsChecker()
-        {
-            var numberInput = Console.ReadLine();
-            short number;
-            bool IsNumberParsed = short.TryParse(numberInput, out number) && (number > 0 && number < 1000);
-            while (!IsNumberParsed)
-            {
-                Console.WriteLine("Please enter correct number more than zero and less than 999");
-                IsNumberParsed = short.TryParse(Console.ReadLine(), out number) && (number > 0 && number < 1000);
-            }
-            return number;
         }
     }
 }

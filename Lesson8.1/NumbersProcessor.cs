@@ -1,4 +1,4 @@
-﻿namespace Lesson8._1
+﻿namespace Lesson8Events
 {
     public class NumbersProcessor
     {

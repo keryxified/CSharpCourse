@@ -1,4 +1,4 @@
-﻿namespace Lesson3.Store
+﻿namespace Lesson10.Store
 {
     internal record Food : StoreItem, IHasShelfLife
     {

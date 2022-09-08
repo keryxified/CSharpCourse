@@ -22,24 +22,33 @@ namespace Lesson2
             string TextInputChecker()
             {
                 string text = Console.ReadLine();
-                while (!Regex.IsMatch(text, @"^[a-zA-Z]+$"))
+                bool isValidText;
+                do
                 {
-                    Console.WriteLine($"Please enter correct text! It should contain only latin letters.");
-                    text = Console.ReadLine();
+                    isValidText = (Regex.IsMatch(text, @"^[a-zA-Z]+$"));
+                    if (!isValidText)
+                    {
+                        Console.WriteLine($"Please enter correct text! It should contain only latin letters.");
+                        text = Console.ReadLine();
+                    }
                 }
+                while (!isValidText);
                 return text;
             }
 
             int AgeChecker()
             {
-                var ageInput = Console.ReadLine();
                 int age;
-                bool IsAgeParsed = int.TryParse(ageInput, out age) && (age > 9 && age < 101);
-                while (!IsAgeParsed)
+                bool isValidAge;
+                do
                 {
-                    Console.WriteLine("Please enter correct number from 10 to 99");
-                    IsAgeParsed = int.TryParse(Console.ReadLine(), out age) && (age > 9 && age < 100);
+                    isValidAge = int.TryParse(Console.ReadLine(), out age) && (age > 9 && age < 101);
+                    if (!isValidAge)
+                    {
+                        Console.WriteLine("Please enter correct number from 10 to 99!");
+                    }
                 }
+                while (!isValidAge);
                 return age;
             }
         }

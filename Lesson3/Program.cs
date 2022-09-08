@@ -1,6 +1,6 @@
-﻿using Lesson3.Store;
+﻿using Lesson10.Store;
 
-namespace Lesson3
+namespace Lesson10
 {
     internal class Program
     {

@@ -1,4 +1,6 @@
-﻿namespace Lesson8
+﻿using Lesson8.Builder;
+
+namespace Lesson8
 {
     internal class Program
     {
@@ -6,7 +8,7 @@
         {
             UserAddress userAddress = new UserAddress();
             AddressBuilder builder = new AddressBuilder();
-            userAddress =  builder.GetAddress();
+            userAddress = builder.WithIndex().WithCity().Build();
             Console.WriteLine(userAddress);
         }
     }

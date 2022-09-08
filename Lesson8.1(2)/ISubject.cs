@@ -1,4 +1,4 @@
-﻿namespace Lesson8._1_2_
+﻿namespace Lesson8Observer
 {
     public interface ISubject
     {
