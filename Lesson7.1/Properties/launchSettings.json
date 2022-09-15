@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Lesson7.FileStream": {
+      "commandName": "Project",
+      "commandLineArgs": "d:\\test\r\n"
+    }
+  }
+}

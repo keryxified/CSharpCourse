@@ -1,18 +1,24 @@
-﻿namespace Lesson7._1
+﻿namespace Lesson7.Filestream
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             string fileDirectory = args[0];
-            string[] files = Directory.GetFiles(fileDirectory);
-            using (FileStream fstream = new FileStream($"{fileDirectory}result.txt", FileMode.Append))
+            await WriteFileAsync(fileDirectory);
+        }
+
+        static async Task WriteFileAsync(string dir)
+        {
+            string[] files = Directory.GetFiles(dir);
+            using (var fstream = new FileStream($"{Path.Combine(dir, "result.txt")}", FileMode.Append))
             {
                 foreach (var file in files)
                 {
-                    var readFile = new FileStream(file, FileMode.Open);
-                    readFile.CopyToAsync(fstream);
-                    readFile.Close();
+                    await using (var readFile = new FileStream(file, FileMode.Open))
+                    {
+                        await readFile.CopyToAsync(fstream);
+                    }
                 }
                 fstream.Close();
             }
